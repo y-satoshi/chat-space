@@ -20,21 +20,28 @@ ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 |name|string|null: false,index: true|
 |email|string|null: false|
 |password|string|null: false, password.match(/[a-z\d]{8,}/i)|
-
+### Association
+- has_many :groups_users
+- has_many :messages
 
 ## groups_usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|references|null: false|
-|group_id|integer|null: false|
+|user_id|references|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :group
-- has_many :users
+- belongs_to :user
 
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false|
+|name|string|null: false|
+### Association
+- has_many :users
+- has_many :groups_users
+- has_many :messages
+
 
 
 ## messageテーブル
@@ -44,6 +51,10 @@ ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 |group_id|references|null: false, foreign_key: true|
 |text|string|
 |image|string|
+### Association
+- has_many :users
+- has_many :groups
+
 
 
 * Database initialization
