@@ -14,43 +14,37 @@ ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 
 * Database creation
 
-userテーブル
+## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false, foreign_key: true|
-|email|string|null: false, foreign_key: true|
-|password|string|null: false, foreign_key: true, password.match(/[a-z\d]{8,}/i)|
-### Association
-- has many :group
-- has many :message
+|name|string|null: false,index: true|
+|email|string|null: false|
+|password|string|null: false, password.match(/[a-z\d]{8,}/i)|
 
-groups_usersテーブル
+
+## groups_usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user_id|references|null: false|
+|group_id|integer|null: false|
 ### Association
 - belongs_to :group
-- belongs_to :user
+- has_many :users
 
-groupテーブル
+## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|message_id|integer|null: false, foreign_key: true|
-### Association
-- has many :user
-- has many :message
+|group_name|string|null: false|
 
-messageテーブル
+
+## messageテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|text|string|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
+|text|string|
 |image|string|
-### Association
-- belongs_to :group
-- belongs_to :user
+
 
 * Database initialization
 
