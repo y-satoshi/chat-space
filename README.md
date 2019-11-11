@@ -22,7 +22,7 @@ ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 |password|string|null: false, password.match(/[a-z\d]{8,}/i)|
 ### Association
 - has_many :groups_users
-- has_many :groups
+- has_many :groups, through: :groups_users
 - has_many :messages
 
 ## groups_usersテーブル
@@ -39,7 +39,7 @@ ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 |------|----|-------|
 |name|string|null: false|
 ### Association
-- has_many :users
+- has_many :users, through: :groups_users
 - has_many :groups_users
 - has_many :messages
 
