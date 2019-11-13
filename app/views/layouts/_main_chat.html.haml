@@ -1,0 +1,24 @@
+.main_chat
+  .main_header
+    .main_header__group
+      .main_header__group__current_group
+        test
+      .main_header__group__mennber_list
+        Menber:iasd
+    .main_header__edit_btn
+      =link_to "Edit"
+  .main_contents
+    .main_contents__group
+      .main_contents__group__user
+        syouya
+      .main_contents__group__date
+        2019/11/12(Tue) 15:39:53
+    .main_contents__massage
+      aaaaa
+  .main_form
+    %input.main_form__inputbox{type: "text", placeholder: "type a massage", class: "type_a_message"}
+    =link_to "~/Users/yamaguchisatoshi", class: "main_form__inputbox__black_icon" do
+      = icon('far', 'image', class: "black_icon")
+    .main_form__btn
+      =link_to "#", class: "form_btn" do
+        send

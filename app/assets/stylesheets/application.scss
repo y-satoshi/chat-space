@@ -2,5 +2,8 @@
 @import "font-awesome-sprockets";
 @import "./font-awesome";
 @import "side_ber";
+@import "main_chat";
 
-
+.wrapper{
+  display: flex;
+}
