@@ -1,7 +1,10 @@
+.hidden{
+  display: none;
+}
 .main_chat{
   width: calc(100vw - 300px);
   height: 100vh;
-  float: left;
+  float: right;
   .main_header{
     height: 100px;
     display: flex;
@@ -38,54 +41,60 @@
   .main_contents{
     background-color: #fafafa;
     height: calc(100vh - 190px);
-    padding: 0 40px;
-    &__group{
-      display: flex;
-      padding-top: 46px;
-      &__user{
-        font-size: 16px;
-        color: #434a54;
-        font-weight: bold;
-        padding-right: 10px;
-        padding-bottom: 10px;
-      }
-      &__date{
-        font-size: 12px;
-        color: #999999;
-      }
+    padding: 35px 40px;
+    box-sizing: border-box;
+        &__user{
+          display: flex;
+          font-size: 16px;
+          color: #434a54;
+          font-weight: bold;
+          padding-bottom: 10px;
+        }
+          &__date{
+            font-weight: normal;
+            padding-left: 10px;
+            font-size: 12px;
+            color: #999999;
+          }
+    &__massage{
+      font-size: 14px;
+      color: #434a54;
+      padding-bottom: 40px;
+    }
   }
-  &__massage{
-    font-size: 14px;
-    color: #434a54;
-  }
-  }
+  
 
   .main_form{
     height: 90px;
-    padding: 20px 40px;
+    padding: 20px 50px 20px 40px;
     background-color: #ddd;
     box-sizing: border-box;
-    position: relative;
-    display: flex;
+    .new_message{
+      position: relative;
+      display: flex;
+    }
       &__inputbox{
-        position: relative;
+        border: none;
+        box-sizing: border-box;
+        float: left;
         height: 50px;
-        width: 100%;
-        border-style: none;
-      }
+        padding: 0 10px;
+        width: calc(100% - 150px);
+        }
         &black__icon{
           color: black;
           font-size: 1.3rem;
           cursor: pointer;
         }
       &__btn{
-        width: 34px;
+        background-color: #38AEF0;
+        border: none;
+        color: #fff;
+        font-size: 16px;
         height: 50px;
-        padding: 0 30px;
+        width: 92px;
         margin-left: 15px;
-        background-color: #38aef0;
-        cursor: pointer;
-        text-align: center;
+        padding: 0 30px;
       }
   }
 }
@@ -93,18 +102,14 @@
 .black_icon{
   font-size: 1.3rem;
   position: absolute;
-  bottom: 35px;
-  right: 150px;
+  bottom: 15px;
+  right: 120px;
   color: black;
   font-size: 1.5rem;
 }
-.form_btn{
-  line-height: 50px;
-  text-decoration: none;
-  color: white;
-  text-decoration: none;
-}
+
 .type_a_message{
+  width: 100%;
   font-size: 16px;
   color: #434a54;
   padding-left: 10px;

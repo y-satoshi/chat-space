@@ -2,23 +2,25 @@
   .main_header
     .main_header__group
       .main_header__group__current_group
-        test
+        = @group.name
       .main_header__group__mennber_list
-        Menber:iasd
+        - @group.users.each do |user|
+          Menber :
+          = user.name
     .main_header__edit_btn
-      =link_to "Edit"
+      = link_to "Edit", edit_group_path(params[:group_id]), method: :get
   .main_contents
-    .main_contents__group
-      .main_contents__group__user
-        syouya
-      .main_contents__group__date
-        2019/11/12(Tue) 15:39:53
-    .main_contents__massage
-      aaaaa
+    - @messages.each do |message|
+      .main_contents__user
+        = message.user.name
+        .main_contents__date
+          = message.created_at.strftime("%Y/%m/%d %H:%M:%S")
+      .main_contents__massage
+        = message.content
   .main_form
-    %input.main_form__inputbox{type: "text", placeholder: "type a massage", class: "type_a_message"}
-    =link_to "~/Users/yamaguchisatoshi", class: "main_form__inputbox__black_icon" do
-      = icon('far', 'image', class: "black_icon")
-    .main_form__btn
-      =link_to "#", class: "form_btn" do
-        send
+    = form_for [@group, @message] do |f|
+      = f.text_field :content,  class: 'main_form__inputbox', placeholder: "type a massage", class: "type_a_message" 
+      = f.label :image, class: "main_form__inputbox__black_icon" do
+        = icon('far', 'image', class: "black_icon")
+        = f.file_field :image, class: 'hidden'
+      = f.submit "Send", class: 'main_form__btn'
