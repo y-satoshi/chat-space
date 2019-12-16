@@ -14,9 +14,12 @@
       .main_contents__user
         = message.user.name
         .main_contents__date
-          = message.created_at.strftime("%Y/%m/%d %H:%M:%S")
-      .main_contents__massage
-        = message.content
+          = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      .main_contents__message
+      - if message.content.present?
+        %p.main_contents__message__content
+          = message.content
+      = image_tag message.image.url, class: 'main_contents__message__image' if message.image.present?
   .main_form
     = form_for [@group, @message] do |f|
       = f.text_field :content,  class: 'main_form__inputbox', placeholder: "type a massage", class: "type_a_message" 
