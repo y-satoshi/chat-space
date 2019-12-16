@@ -1,5 +1,4 @@
 $(function(){
-  // メッセージ表示のHTMLを生成
   function buildHTML(message) {
     var insertImage = '';
     if (message.image.url) {
@@ -32,8 +31,7 @@ $(function(){
     }
   return html
   }
-
-  // メッセージ送信の非同期通信
+  
   $("#new_message").on("submit", function(e){
     e.preventDefault();
     var formData = new FormData(this);
