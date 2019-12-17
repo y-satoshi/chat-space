@@ -4,8 +4,8 @@
       .main_header__group__current_group
         = @group.name
       .main_header__group__mennber_list
+        Menber:
         - @group.users.each do |user|
-          Menber :
           = user.name
     .main_header__edit_btn
       = link_to "Edit", edit_group_path(params[:group_id]), method: :get
