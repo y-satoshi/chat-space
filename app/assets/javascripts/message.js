@@ -83,7 +83,6 @@ $(function(){
         data: {id: last_message_id}
       })
       .done(function(messages) {
-        console.table(messages)
         var insertHTML = '';
         messages.forEach(function (message) {
           insertHTML = buildHTML(message)
@@ -92,9 +91,9 @@ $(function(){
         $('.main_contents').animate({ scrollTop: $('.main_contents')[0].scrollHeight});
       })
       .fail(function() {
-        console.log('error');
+        alert('自動更新に失敗しました');
       });
     }
   }
-  setInterval(reloadMessages, 4000);
+  setInterval(reloadMessages, 7000);
 });
