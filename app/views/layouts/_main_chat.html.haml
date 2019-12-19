@@ -11,13 +11,13 @@
       = link_to "Edit", edit_group_path(params[:group_id]), method: :get
   .main_contents
     - @messages.each do |message|
-      .main_contents__user
+      .main_contents__user{"data-message-id": "#{message.id}"}
         = message.user.name
-        .main_contents__date
+        .main_contents__date{"data-message-id": "#{message.id}"}
           = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
       .main_contents__message
       - if message.content.present?
-        %p.main_contents__message__content
+        %p.main_contents__message__content{"data-message-id": "#{message.id}"}
           = message.content
       = image_tag message.image.url, class: 'main_contents__message__image' if message.image.present?
   .main_form

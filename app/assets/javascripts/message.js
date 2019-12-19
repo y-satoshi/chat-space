@@ -1,37 +1,50 @@
 $(function(){
   // メッセージ表示のHTMLを生成
-  function buildHTML(message) {
-    var insertImage = '';
-    if (message.image.url) {
-      insertImage = `<img src="${message.image.url}">`;
+  var buildHTML = function(message) {
+    if (message.content && message.image) {
+      
       var html = `
-                  <div class="main_contents__user">
-                  ${message.user}
+                    <div class="main_contents__user" >
+                      ${message.user}
+                      <div class="main_contents__date">
+                        ${message.date}
+                      </div>
+                    </div>
+                    <div class="main_contents__message"></div>
+                    <p class="main_contents__message__content" data-message-id="${message.id}">${message.content}</p>
+                    <img src="${message.image}">
+                  `
+    }else if (message.content){
+     var html = `
+                    <div class="main_contents__user">
+                      ${message.user}
+                      <div class="main_contents__date">
+                        ${message.date}
+                      </div>
+                    </div>
+                    <div class="main_contents__message"></div>
+                    <p class="main_contents__message__content" data-message-id="${message.id}">
+                      ${message.content}
+                    </p>
+                  `
+    } else if (message.image) {
+      var html = `
+                    <div class="main_contents__user">
+                    ${message.user}
                     <div class="main_contents__date">
                       ${message.date}
                     </div>
                   </div>
                   <div class="main_contents__message"></div>
-                  <p class="main_contents__message__content">${message.content}</p>
-                  <img class="main_contents__message__image">${insertImage}</img>
+                  <p class="main_contents__message__content" data-message-id="${message.id}">
+                  <img src="${message.image}">
+                  </p>
+                    
                   `
-    }
-    else{
-    var html = `
-                <div class="main_contents__user">
-                  ${message.user}
-                  <div class="main_contents__date">
-                    ${message.date}
-                  </div>
-                </div>
-                <div class="main_contents__message"></div>
-                <p class="main_contents__message__content">
-                  ${message.content}
-                </p>
-                `
-    }
-  return html
+    };
+  return html;
   }
+
 
   // メッセージ送信の非同期通信
   $("#new_message").on("submit", function(e){
@@ -58,4 +71,30 @@ $(function(){
     });
   return false;
   });
+
+//自動更新
+  let reloadMessages = function () {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)) {
+      let last_message_id = $('.main_contents__message__content:last').data("message-id");
+      $.ajax({
+        url: "api/messages",
+        type: 'get',
+        dataType: 'json',
+        data: {id: last_message_id}
+      })
+      .done(function(messages) {
+        console.table(messages)
+        var insertHTML = '';
+        messages.forEach(function (message) {
+          insertHTML = buildHTML(message)
+        });
+        $('.main_contents').append(insertHTML);
+        $('.main_contents').animate({ scrollTop: $('.main_contents')[0].scrollHeight});
+      })
+      .fail(function() {
+        console.log('error');
+      });
+    }
+  }
+  setInterval(reloadMessages, 4000);
 });
