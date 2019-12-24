@@ -11,7 +11,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '5.2.1'
 
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['~/.ssh/chatspace_pem.pem']
+                  keys: ['~/.ssh/chatspace.pem']
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
